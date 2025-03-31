@@ -46,18 +46,19 @@ fi
 capture=$(echo -e ExternalIP="$externalip" + InternalIP="$internalip" + "$isadmin" + username="$username" \\n\\r_________________________________________________________________________________________\\n\\r\\n\\r);
 
 #Switch command line arguments
-while getopts conh: options
+while getopts con:h options
 do
     case $options in
     c)    cflag=1;; #Clean up afterwards
     o)    oflag=1;; #Onetimesecret
     h)    hflag=1;; #Hide terminal after execution
-    n)    nflag=1 #Number of times to prompt
+    n)    nflag=1;  #Number of times to prompt
           nval="$OPTARG";;
     ?)   printf "Usage: %s: [-n value] args\n" $0
             exit 2;;
     esac
 done
+
 #Flag to set the number of times to prompt
 if [ ! -z "$nflag" ]; then
     promptcount=$(($nval - 1))
